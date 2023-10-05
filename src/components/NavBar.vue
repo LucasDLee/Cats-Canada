@@ -1,8 +1,9 @@
 <template>
   <nav>
+    <img src="@/assets/cat.png" alt="icon" width="25" height="25" />
     <RouterLink to="/">Cat Map</RouterLink>
     <RouterLink to="/about">About</RouterLink>
-    </nav>
+  </nav>
 </template>
 
 <script setup>
@@ -11,7 +12,7 @@ import { RouterLink } from 'vue-router'
 
 <style scoped>
 nav {
-  background-color: aliceblue;
+  background-color: white;
   border-bottom: 1px dotted black;
   display: flex;
   gap: 0 1em;
@@ -20,13 +21,13 @@ nav {
   height: 2vh;
 }
 
-nav>* {
+nav > * {
   color: hsla(160, 100%, 37%, 1);
   font-size: 20px;
   text-decoration: none;
 }
 
-nav>*:hover {
+nav > *:hover {
   font-style: italic;
 }
 </style>
