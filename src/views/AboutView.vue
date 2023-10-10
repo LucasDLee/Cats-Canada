@@ -22,6 +22,8 @@ import AboutFooter from '@/components/AboutFooter.vue'
 
 <style>
 .about {
+  display: flex;
+  flex-direction: column;
   padding: 1em;
 }
 </style>
