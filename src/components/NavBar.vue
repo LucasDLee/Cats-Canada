@@ -1,6 +1,5 @@
 <template>
   <nav>
-    <img src="@/assets/cat.png" alt="icon" width="25" height="25" />
     <RouterLink to="/">Cat Map</RouterLink>
     <RouterLink to="/about">About</RouterLink>
   </nav>
@@ -12,22 +11,61 @@ import { RouterLink } from 'vue-router'
 
 <style scoped>
 nav {
-  background-color: white;
-  border-bottom: 1px dotted black;
-  display: flex;
-  gap: 0 1em;
-  flex-direction: row;
-  padding: 1em;
-  height: 2vh;
+  background-color: var(--hyperlink-bg-color);
+  text-transform: uppercase;
+  text-align: center;
+  font-weight: 600;
 }
 
 nav > * {
-  color: hsla(160, 100%, 37%, 1);
-  font-size: 20px;
+  display: inline-block;
+  list-style: outside none none;
+  margin: 0 1em;
+  padding: 0;
+}
+
+nav > * {
+  padding: 0.7em 0.7em;
+  position: relative;
   text-decoration: none;
+  font-size: 20px;
+}
+
+nav > *::before,
+nav > *::after {
+  content: '';
+  height: 14px;
+  width: 14px;
+  position: absolute;
+  transition: all .35s ease;
+  opacity: 0;
+}
+
+nav > *::before {
+  content: '';
+  right: 0;
+  top: 0;
+  border-top: 3px solid #3E8914;
+  border-right: 3px solid #2E640F;
+  transform: translate(-100%, 50%);
+}
+
+nav > *:after {
+  content: '';
+  left: 0;
+  bottom: 0;
+  border-bottom: 3px solid #2E640F;
+  border-left: 3px solid #3E8914;
+  transform: translate(100%, -50%)
+}
+
+nav > *:hover:before,
+nav > *:hover:after{
+  transform: translate(0,0);
+  opacity: 1;
 }
 
 nav > *:hover {
-  font-style: italic;
+  color: #3DA35D;
 }
 </style>

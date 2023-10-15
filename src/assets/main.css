@@ -1,3 +1,7 @@
+:root {
+  --hyperlink-bg-color: #518196;
+}
+
 body {
   margin: 0;
 }

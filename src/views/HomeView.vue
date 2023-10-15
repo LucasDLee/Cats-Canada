@@ -8,17 +8,22 @@
       :max-bounds="bounds"
       @mousemove="getCoords"
     >
+      <l-control-layers position="topright"></l-control-layers>
       <l-tile-layer
-        url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
+        v-for="tileProvider in tileProviders"
+        :key="tileProvider.name"
+        :name="tileProvider.name"
+        :visible="tileProvider.visible"
+        :url="tileProvider.url"
+        :attribution="tileProvider.attribution"
         layer-type="base"
-        name="OpenStreetMap"
-      ></l-tile-layer>
+      />
 
       <l-control-scale position="bottomleft"></l-control-scale>
 
       <div class="mouseOverCoord">
-        <span class="info--text">{{ this.mouseLatLon.lat }}</span
-        >, <span class="info--text">{{ this.mouseLatLon.lon }}</span>
+        <span class="info--text">{{ this.mouseLatLon.lat }}</span>, 
+        <span class="info--text">{{ this.mouseLatLon.lon }}</span>
       </div>
     </l-map>
   </section>
@@ -26,13 +31,14 @@
 
 <script>
 import 'leaflet/dist/leaflet.css'
-import { LMap, LTileLayer, LControlScale } from '@vue-leaflet/vue-leaflet'
+import { LMap, LTileLayer, LControlScale, LControlLayers } from '@vue-leaflet/vue-leaflet'
 
 export default {
   components: {
     LMap,
     LTileLayer,
-    LControlScale
+    LControlScale,
+    LControlLayers
   },
   data() {
     return {
@@ -46,6 +52,27 @@ export default {
         lat: 0,
         lon: 0
       },
+      tileProviders: [
+        {
+          name: 'ESRI World Street Map',
+          visible: true,
+          url: 'https://services.arcgisonline.com/ArcGIS/rest/services/World_Street_Map/MapServer/tile/{z}/{y}/{x}',
+          attribution: '&copy; <a href="https://services.arcgisonline.com/ArcGIS/rest/services/World_Street_Map/MapServer/">ESRI World Street M</a>'
+        },
+        {
+          name: 'OpenStreetMap',
+          visible: false,
+          attribution:
+            '&copy; <a target="_blank" href="http://osm.org/copyright">OpenStreetMap</a> contributors',
+          url: 'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',
+        },
+        {
+          name: 'Wikimedia Maps',
+          visible: false,
+          url: 'https://maps.wikimedia.org/osm-intl/{z}/{x}/{y}.png',
+          attribution: '&copy; <a href="https://www.mediawiki.org/wiki/Wikimedia_Maps/API">Wikimedia Maps API</a>'
+        }
+      ],
       zoom: 5
     }
   },

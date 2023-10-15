@@ -11,9 +11,8 @@
 
     <h1>Contacts</h1>
     <p>If you don't see your organization on the map, feel free to contact me</p>
-
-    <AboutFooter />
   </div>
+  <AboutFooter />
 </template>
 
 <script setup>

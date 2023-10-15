@@ -12,9 +12,9 @@ export default {
     return {
       githubProfile: 'https://github.com/LucasDLee',
       githubImg: '/img/github.webp',
-      linkedInProfile: '',
+      linkedInProfile: 'https://www.linkedin.com/in/lucasdlee',
       linkedInImg: '/img/linkedin.webp',
-      email: '',
+      email: 'mailto:lucasdlee23@gmail.com',
       emailImg: '/img/email.webp'
     }
   }
@@ -23,8 +23,7 @@ export default {
 
 <style scoped>
 #about-footer {
-  background-color: #518196;
-  bottom: 0;
+  background-color: var(--hyperlink-bg-color);
   display: flex;
   flex-direction: row;
   justify-content: center;

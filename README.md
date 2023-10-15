@@ -33,3 +33,9 @@ npm run build
 ```sh
 npm run lint
 ```
+
+## Attributions
+
+- [Navigation bar hover effect](https://codepen.io/dig-lopes/pen/XovjNL)
+- [Footer icons effect](https://codepen.io/ephs23/pen/NeQZGx)
+- [Yin and Yang Cats](https://codepen.io/ainalem/pen/VwbyjLQ)
