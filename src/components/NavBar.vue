@@ -12,12 +12,14 @@ import { RouterLink } from 'vue-router'
 <style scoped>
 nav {
   background-color: var(--hyperlink-bg-color);
+  border-bottom: 1px dotted black;
   text-transform: uppercase;
   text-align: center;
   font-weight: 600;
 }
 
 nav > * {
+  color: #7D71AA;
   display: inline-block;
   list-style: outside none none;
   margin: 0 1em;
@@ -45,8 +47,8 @@ nav > *::before {
   content: '';
   right: 0;
   top: 0;
-  border-top: 3px solid #3E8914;
-  border-right: 3px solid #2E640F;
+  border-top: 3px solid var(--main3);
+  border-right: 3px solid var(--main3);
   transform: translate(-100%, 50%);
 }
 
@@ -54,8 +56,8 @@ nav > *:after {
   content: '';
   left: 0;
   bottom: 0;
-  border-bottom: 3px solid #2E640F;
-  border-left: 3px solid #3E8914;
+  border-bottom: 3px solid var(--main3);
+  border-left: 3px solid var(--main3);
   transform: translate(100%, -50%)
 }
 
@@ -66,6 +68,6 @@ nav > *:hover:after{
 }
 
 nav > *:hover {
-  color: #3DA35D;
+  color: var(--main3);
 }
 </style>

@@ -45,8 +45,8 @@ export default {
       bounds: [
         [90, 0],
         [90, -180],
-        [0, 0],
-        [0, -180]
+        [35, 0],
+        [35, -180]
       ],
       mouseLatLon: {
         lat: 0,
