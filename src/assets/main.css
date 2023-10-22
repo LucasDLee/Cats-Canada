@@ -1,0 +1,34 @@
+:root {
+  --hyperlink-bg-color: #F5F57A;
+  --main: #F5F57A;
+  --main2: rgb(191, 183, 111, 0.75);
+  --main3: #3DA35D;
+  --main4: rgb(125, 113, 170, 0.67);
+  --main5: rgb(128, 125, 106, 0.5);
+}
+
+body {
+  /* color: #7D71AA; */
+  margin: 0;
+}
+
+html {
+  font-family:
+    Inter,
+    -apple-system,
+    BlinkMacSystemFont,
+    'Segoe UI',
+    Roboto,
+    Oxygen,
+    Ubuntu,
+    Cantarell,
+    'Fira Sans',
+    'Droid Sans',
+    'Helvetica Neue',
+    sans-serif;
+}
+
+.contents {
+  width: 100vw;
+  height: 94.5vh;
+}
