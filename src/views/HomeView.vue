@@ -4,7 +4,7 @@
       id="cat-map"
       ref="map"
       v-model:zoom="zoom"
-      :center="[54.5, -94]"
+      :center="mapCenter"
       :max-bounds="bounds"
       @mousemove="getCoords"
     >
@@ -19,6 +19,12 @@
         layer-type="base"
       />
 
+      <l-geo-json 
+        refs="cafes"
+        :geojson="cafesList"
+        @click="onFeatureClick">
+      </l-geo-json>
+
       <l-control-scale position="bottomleft"></l-control-scale>
 
       <div class="mouseOverCoord">
@@ -31,14 +37,19 @@
 
 <script>
 import 'leaflet/dist/leaflet.css'
-import { LMap, LTileLayer, LControlScale, LControlLayers } from '@vue-leaflet/vue-leaflet'
+import { LMap, LGeoJson, LTileLayer, LControlScale, LControlLayers } from '@vue-leaflet/vue-leaflet'
 
 export default {
+  async created () {
+    const cafes = await fetch('./static/json/cafes.geojson')
+    this.cafesList = await cafes.json()
+  },
   components: {
-    LMap,
-    LTileLayer,
+    LControlLayers,
     LControlScale,
-    LControlLayers
+    LGeoJson,
+    LMap,
+    LTileLayer
   },
   data() {
     return {
@@ -48,6 +59,8 @@ export default {
         [35, 0],
         [35, -180]
       ],
+      cafesList: null,
+      mapCenter: [54.5, -94],
       mouseLatLon: {
         lat: 0,
         lon: 0
@@ -78,8 +91,13 @@ export default {
   },
   methods: {
     getCoords: function (event) {
-      this.mouseLatLon.lon = event.latlng.lng.toFixed(4)
       this.mouseLatLon.lat = event.latlng.lat.toFixed(4)
+      this.mouseLatLon.lon = event.latlng.lng.toFixed(4)
+    },
+    onFeatureClick: function (e) {
+      const properties = e.layer.feature.properties
+      this.mapCenter = [this.mouseLatLon.lat, this.mouseLatLon.lon]
+      e.sourceTarget.bindPopup(`<b>Name:</b> ${properties.name}<br><b>Address:</b> ${properties.address}<br><b>Province:</b> ${properties.province}`).openPopup()
     }
   }
 }

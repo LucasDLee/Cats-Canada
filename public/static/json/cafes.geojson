@@ -1,0 +1,389 @@
+{
+  "type": "FeatureCollection",
+  "features": [
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -123.1071389567,
+          49.2799723540573
+        ]
+      },
+      "properties": {
+        "name": "Catfe",
+        "address": "UNIT #2035 - SECOND FLOOR, INTERNATIONAL VILLAGE MALL, 88 W Pender St, Vancouver, BC V6B 6N9",
+        "province": "British Columbia",
+        "province_code": "BC"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -123.089589218037,
+          49.2622918402362
+        ]
+      },
+      "properties": {
+        "name": "Catoro Caf\u00e9",
+        "address": "666 E Broadway, Vancouver, BC V5T 1X6",
+        "province": "British Columbia",
+        "province_code": "BC"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -123.134654648407,
+          49.1674089986458
+        ]
+      },
+      "properties": {
+        "name": "PETPLS Caf\u00e9 and Supply",
+        "address": "6386 No. 3 Rd #165, Richmond, BC V6Y 2B3",
+        "province": "British Columbia",
+        "province_code": "BC"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -123.140645711118,
+          49.171159468281
+        ]
+      },
+      "properties": {
+        "name": "Catopia",
+        "address": "5951 Minoru Blvd #145, Richmond, BC V6X 4B1",
+        "province": "British Columbia",
+        "province_code": "BC"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -123.942066725036,
+          49.1650943720262
+        ]
+      },
+      "properties": {
+        "name": "Kitties & Cream",
+        "address": "427 Fitzwilliam St #204, Nanaimo, BC V9R 3A9",
+        "province": "British Columbia",
+        "province_code": "BC"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -119.493111488041,
+          49.8881696166051
+        ]
+      },
+      "properties": {
+        "name": "Catelowna Cat Cafe",
+        "address": "1441 Ellis St, Kelowna, BC V1Y 2A3",
+        "province": "British Columbia",
+        "province_code": "BC"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -114.086024877899,
+          51.0543592988938
+        ]
+      },
+      "properties": {
+        "name": "Regal Cat Cafe",
+        "address": "303 10 St NW, Calgary, AB T2N 1V8",
+        "province": "Alberta",
+        "province_code": "AB"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -113.491930986899,
+          53.5178975043189
+        ]
+      },
+      "properties": {
+        "name": "Cat Cafe on Whyte",
+        "address": "10111 82 Ave NW, Edmonton, AB T6E 1Z5",
+        "province": "Alberta",
+        "province_code": "AB"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -118.809627956048,
+          55.1871073590373
+        ]
+      },
+      "properties": {
+        "name": "Whiskers Cat Caf\u00e9",
+        "address": "11735 105 St #103, Grande Prairie, AB T8V 8L1",
+        "province": "Alberta",
+        "province_code": "AB"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -104.618319772077,
+          50.4445060489642
+        ]
+      },
+      "properties": {
+        "name": "Excalipurr Cat Caf\u00e9",
+        "address": "2156 Albert St, Regina, SK S4P 2T9",
+        "province": "Saskatchewan",
+        "province_code": "SK"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -106.663992140542,
+          52.1279455000387
+        ]
+      },
+      "properties": {
+        "name": "The Purrfect Cup Cat Cafe",
+        "address": "142 2 Ave S, Saskatoon, SK S7K 1K5",
+        "province": "Saskatchewan",
+        "province_code": "SK"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -97.1838831906347,
+          49.9019955444421
+        ]
+      },
+      "properties": {
+        "name": "Miss J. La\u2019s Fur Babies Cat Cafe",
+        "address": "1428 Erin St, Winnipeg, MB R3E 2S8",
+        "province": "Manitoba",
+        "province_code": "MB"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -97.1684794253329,
+          49.8861827578799
+        ]
+      },
+      "properties": {
+        "name": "Cleocatra Caf\u00e9 - Cat Cafe",
+        "address": "859 Portage Ave, Winnipeg, MB R3G 0N8",
+        "province": "Manitoba",
+        "province_code": "MB"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -80.9817350427728,
+          43.3693656814465
+        ]
+      },
+      "properties": {
+        "name": "Alley Cat Cat Cafe",
+        "address": "1 Market Pl, Stratford, ON N5A 1A4",
+        "province": "Ontario",
+        "province_code": "ON"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -80.2498608383019,
+          43.5469588546652
+        ]
+      },
+      "properties": {
+        "name": "My Kitty Cafe",
+        "address": "117 Wyndham St N, Guelph, ON N1H 4E9",
+        "province": "Ontario",
+        "province_code": "ON"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -79.2820933416935,
+          43.7659946224858
+        ]
+      },
+      "properties": {
+        "name": "Lazy Cat Cafe",
+        "address": "880 Ellesmere Rd Unit 3, Scarborough, ON M1P 2L8",
+        "province": "Ontario",
+        "province_code": "ON"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -78.283739196748,
+          43.9495567942138
+        ]
+      },
+      "properties": {
+        "name": "Toe Beans Cat Cafe",
+        "address": "119 Peter St, Port Hope, ON L1A 1C5",
+        "province": "Ontario",
+        "province_code": "ON"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -73.5779625598521,
+          45.5185014210298
+        ]
+      },
+      "properties": {
+        "name": "Happy Cat Cafe",
+        "address": "172 Duluth Ave E, Montreal, Quebec H2W 1H3",
+        "province": "Quebec",
+        "province_code": "QC"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -73.5723303442519,
+          45.4569085519345
+        ]
+      },
+      "properties": {
+        "name": "Caf\u00e9 Chato",
+        "address": "4833 Rue de Verdun, Verdun, QC H4G 1N2",
+        "province": "Quebec",
+        "province_code": "QC"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -71.8851274593948,
+          45.4040828216127
+        ]
+      },
+      "properties": {
+        "name": "Caf\u00e9 Chat L'\u00e9toile",
+        "address": "103 Rue King E, Sherbrooke, QC J1G 1A5",
+        "province": "Quebec",
+        "province_code": "QC"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -71.2117598614255,
+          46.8166466260404
+        ]
+      },
+      "properties": {
+        "name": "Caf\u00e9 F\u00e9lin Ma Langue Aux Chats",
+        "address": "307 Rue Saint-Paul, Qu\u00e9bec, QC G1K 3W6",
+        "province": "Quebec",
+        "province_code": "QC"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -71.2181024788384,
+          46.8124218690217
+        ]
+      },
+      "properties": {
+        "name": "Caf\u00e9 F\u00e9lin Chats-Nous",
+        "address": "795 Rue Saint-Olivier, Qu\u00e9bec, QC G1R 1H4",
+        "province": "Quebec",
+        "province_code": "QC"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -66.6133124131061,
+          45.98208805898
+        ]
+      },
+      "properties": {
+        "name": "The Purrfect Cup - A Cat Cafe",
+        "address": "580 Two Nations Croisement Unit 9, Fredericton, NB E3A 0X9",
+        "province": "New Brunswick",
+        "province_code": "NB"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -52.702064712488,
+          47.569521485259
+        ]
+      },
+      "properties": {
+        "name": "Mad Catter Cafe",
+        "address": "124 Duckworth St, St. John's, NL A1C 1E8",
+        "province": "Newfoundland And Labrador",
+        "province_code": "NL"
+      }
+    }
+  ]
+}
