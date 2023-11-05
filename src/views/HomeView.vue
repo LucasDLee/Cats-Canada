@@ -4,7 +4,7 @@
       id="cat-map"
       ref="map"
       v-model:zoom="zoom"
-      :center="[54.5, -94]"
+      :center="mapCenter"
       :max-bounds="bounds"
       @mousemove="getCoords"
     >
@@ -19,6 +19,13 @@
         layer-type="base"
       />
 
+      <l-geo-json 
+        refs="cafes"
+        :geojson="cafesList"
+        @click="onFeatureClick">
+        <l-popup><BindPopupMessage :cafeData=selectedCafeProperties></BindPopupMessage></l-popup>
+      </l-geo-json>
+
       <l-control-scale position="bottomleft"></l-control-scale>
 
       <div class="mouseOverCoord">
@@ -30,15 +37,23 @@
 </template>
 
 <script>
+import BindPopupMessage from '@/components/widgets/BindPopupMessage.vue'
 import 'leaflet/dist/leaflet.css'
-import { LMap, LTileLayer, LControlScale, LControlLayers } from '@vue-leaflet/vue-leaflet'
+import { LMap, LPopup, LGeoJson, LTileLayer, LControlScale, LControlLayers } from '@vue-leaflet/vue-leaflet'
 
 export default {
+  async created () {
+    const cafes = await fetch('./static/json/cafes.geojson')
+    this.cafesList = await cafes.json()
+  },
   components: {
-    LMap,
-    LTileLayer,
+    BindPopupMessage,
+    LControlLayers,
     LControlScale,
-    LControlLayers
+    LGeoJson,
+    LMap,
+    LPopup,
+    LTileLayer
   },
   data() {
     return {
@@ -48,6 +63,8 @@ export default {
         [35, 0],
         [35, -180]
       ],
+      cafesList: null,
+      mapCenter: [54.5, -94],
       mouseLatLon: {
         lat: 0,
         lon: 0
@@ -57,14 +74,19 @@ export default {
           name: 'ESRI World Street Map',
           visible: true,
           url: 'https://services.arcgisonline.com/ArcGIS/rest/services/World_Street_Map/MapServer/tile/{z}/{y}/{x}',
-          attribution: '&copy; <a href="https://services.arcgisonline.com/ArcGIS/rest/services/World_Street_Map/MapServer/">ESRI World Street M</a>'
+          attribution: 'Tiles &copy; Esri &mdash; Source: Esri, DeLorme, NAVTEQ, USGS, Intermap, iPC, NRCAN, Esri Japan, METI, Esri China (Hong Kong), Esri (Thailand), TomTom, 2012'
         },
         {
           name: 'OpenStreetMap',
           visible: false,
-          attribution:
-            '&copy; <a target="_blank" href="http://osm.org/copyright">OpenStreetMap</a> contributors',
           url: 'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',
+          attribution:'&copy; <a target="_blank" href="http://osm.org/copyright">OpenStreetMap</a> contributors',
+        },
+        {
+          name: 'Stadia Maps',
+          visible: false,
+          url: 'https://tiles.stadiamaps.com/tiles/osm_bright/{z}/{x}/{y}{r}.png',
+          attribution: '&copy; <a href="https://www.stadiamaps.com/" target="_blank">Stadia Maps</a> &copy; <a href="https://openmaptiles.org/" target="_blank">OpenMapTiles</a> &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
         },
         {
           name: 'Wikimedia Maps',
@@ -73,13 +95,19 @@ export default {
           attribution: '&copy; <a href="https://www.mediawiki.org/wiki/Wikimedia_Maps/API">Wikimedia Maps API</a>'
         }
       ],
+      selectedCafeProperties: '',
       zoom: 5
     }
   },
   methods: {
     getCoords: function (event) {
-      this.mouseLatLon.lon = event.latlng.lng.toFixed(4)
       this.mouseLatLon.lat = event.latlng.lat.toFixed(4)
+      this.mouseLatLon.lon = event.latlng.lng.toFixed(4)
+    },
+    onFeatureClick: function (e) {
+      const properties = e.layer.feature.properties
+      this.mapCenter = [this.mouseLatLon.lat, this.mouseLatLon.lon]
+      this.selectedCafeProperties = properties
     }
   }
 }
