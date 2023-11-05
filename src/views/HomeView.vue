@@ -23,6 +23,7 @@
         refs="cafes"
         :geojson="cafesList"
         @click="onFeatureClick">
+        <l-popup><BindPopupMessage :cafeData=selectedCafeProperties></BindPopupMessage></l-popup>
       </l-geo-json>
 
       <l-control-scale position="bottomleft"></l-control-scale>
@@ -36,8 +37,9 @@
 </template>
 
 <script>
+import BindPopupMessage from '@/components/widgets/BindPopupMessage.vue'
 import 'leaflet/dist/leaflet.css'
-import { LMap, LGeoJson, LTileLayer, LControlScale, LControlLayers } from '@vue-leaflet/vue-leaflet'
+import { LMap, LPopup, LGeoJson, LTileLayer, LControlScale, LControlLayers } from '@vue-leaflet/vue-leaflet'
 
 export default {
   async created () {
@@ -45,10 +47,12 @@ export default {
     this.cafesList = await cafes.json()
   },
   components: {
+    BindPopupMessage,
     LControlLayers,
     LControlScale,
     LGeoJson,
     LMap,
+    LPopup,
     LTileLayer
   },
   data() {
@@ -70,14 +74,19 @@ export default {
           name: 'ESRI World Street Map',
           visible: true,
           url: 'https://services.arcgisonline.com/ArcGIS/rest/services/World_Street_Map/MapServer/tile/{z}/{y}/{x}',
-          attribution: '&copy; <a href="https://services.arcgisonline.com/ArcGIS/rest/services/World_Street_Map/MapServer/">ESRI World Street M</a>'
+          attribution: 'Tiles &copy; Esri &mdash; Source: Esri, DeLorme, NAVTEQ, USGS, Intermap, iPC, NRCAN, Esri Japan, METI, Esri China (Hong Kong), Esri (Thailand), TomTom, 2012'
         },
         {
           name: 'OpenStreetMap',
           visible: false,
-          attribution:
-            '&copy; <a target="_blank" href="http://osm.org/copyright">OpenStreetMap</a> contributors',
           url: 'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',
+          attribution:'&copy; <a target="_blank" href="http://osm.org/copyright">OpenStreetMap</a> contributors',
+        },
+        {
+          name: 'Stadia Maps',
+          visible: false,
+          url: 'https://tiles.stadiamaps.com/tiles/osm_bright/{z}/{x}/{y}{r}.png',
+          attribution: '&copy; <a href="https://www.stadiamaps.com/" target="_blank">Stadia Maps</a> &copy; <a href="https://openmaptiles.org/" target="_blank">OpenMapTiles</a> &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
         },
         {
           name: 'Wikimedia Maps',
@@ -86,6 +95,7 @@ export default {
           attribution: '&copy; <a href="https://www.mediawiki.org/wiki/Wikimedia_Maps/API">Wikimedia Maps API</a>'
         }
       ],
+      selectedCafeProperties: '',
       zoom: 5
     }
   },
@@ -97,7 +107,7 @@ export default {
     onFeatureClick: function (e) {
       const properties = e.layer.feature.properties
       this.mapCenter = [this.mouseLatLon.lat, this.mouseLatLon.lon]
-      e.sourceTarget.bindPopup(`<b>Name:</b> ${properties.name}<br><b>Address:</b> ${properties.address}<br><b>Province:</b> ${properties.province}`).openPopup()
+      this.selectedCafeProperties = properties
     }
   }
 }
