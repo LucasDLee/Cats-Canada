@@ -19,24 +19,20 @@
         layer-type="base"
       />
 
-      <l-geo-json 
-        refs="cafes"
-        :geojson="cafesList"
-        @click="onFeatureClick">
-        <l-popup><BindPopupMessage :cafeData=selectedCafeProperties></BindPopupMessage></l-popup>
+      <l-geo-json refs="cafes" :geojson="cafesList" @click="onFeatureClick">
+        <l-popup><BindPopupMessage :cafeData="selectedCafeProperties"></BindPopupMessage></l-popup>
       </l-geo-json>
 
       <l-control-scale position="bottomleft"></l-control-scale>
 
       <div class="mouseOverCoord">
-        <span class="info--text">{{ this.mouseLatLon.lat }}</span>, 
+        <span class="info--text">{{ this.mouseLatLon.lat }}</span
+        >,
         <span class="info--text">{{ this.mouseLatLon.lon }}</span>
       </div>
     </l-map>
     <div class="locations">
-      <section 
-        v-for="(cafeObject, cafeId) in cafesListDetails"
-        :key="cafeId">
+      <section v-for="(cafeObject, cafeId) in cafesListDetails" :key="cafeId">
         <h1>{{ cafeObject.properties.name }}</h1>
         <p>{{ cafeObject.properties.address }}</p>
         <p>{{ cafeObject.properties.province }}</p>
@@ -48,10 +44,17 @@
 <script>
 import BindPopupMessage from '@/components/widgets/BindPopupMessage.vue'
 import 'leaflet/dist/leaflet.css'
-import { LMap, LPopup, LGeoJson, LTileLayer, LControlScale, LControlLayers } from '@vue-leaflet/vue-leaflet'
+import {
+  LMap,
+  LPopup,
+  LGeoJson,
+  LTileLayer,
+  LControlScale,
+  LControlLayers
+} from '@vue-leaflet/vue-leaflet'
 
 export default {
-  async created () {
+  async created() {
     const cafes = await fetch('./static/json/cafes.geojson')
     this.cafesList = await cafes.json()
     this.cafesListDetails = this.cafesList.features
@@ -85,25 +88,29 @@ export default {
           name: 'ESRI World Street Map',
           visible: true,
           url: 'https://services.arcgisonline.com/ArcGIS/rest/services/World_Street_Map/MapServer/tile/{z}/{y}/{x}',
-          attribution: 'Tiles &copy; Esri &mdash; Source: Esri, DeLorme, NAVTEQ, USGS, Intermap, iPC, NRCAN, Esri Japan, METI, Esri China (Hong Kong), Esri (Thailand), TomTom, 2012'
+          attribution:
+            'Tiles &copy; Esri &mdash; Source: Esri, DeLorme, NAVTEQ, USGS, Intermap, iPC, NRCAN, Esri Japan, METI, Esri China (Hong Kong), Esri (Thailand), TomTom, 2012'
         },
         {
           name: 'OpenStreetMap',
           visible: false,
           url: 'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',
-          attribution:'&copy; <a target="_blank" href="http://osm.org/copyright">OpenStreetMap</a> contributors',
+          attribution:
+            '&copy; <a target="_blank" href="http://osm.org/copyright">OpenStreetMap</a> contributors'
         },
         {
           name: 'Stadia Maps',
           visible: false,
           url: 'https://tiles.stadiamaps.com/tiles/osm_bright/{z}/{x}/{y}{r}.png',
-          attribution: '&copy; <a href="https://www.stadiamaps.com/" target="_blank">Stadia Maps</a> &copy; <a href="https://openmaptiles.org/" target="_blank">OpenMapTiles</a> &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+          attribution:
+            '&copy; <a href="https://www.stadiamaps.com/" target="_blank">Stadia Maps</a> &copy; <a href="https://openmaptiles.org/" target="_blank">OpenMapTiles</a> &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
         },
         {
           name: 'Wikimedia Maps',
           visible: false,
           url: 'https://maps.wikimedia.org/osm-intl/{z}/{x}/{y}.png',
-          attribution: '&copy; <a href="https://www.mediawiki.org/wiki/Wikimedia_Maps/API">Wikimedia Maps API</a>'
+          attribution:
+            '&copy; <a href="https://www.mediawiki.org/wiki/Wikimedia_Maps/API">Wikimedia Maps API</a>'
         }
       ],
       selectedCafeProperties: '',

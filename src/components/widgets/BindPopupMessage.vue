@@ -5,6 +5,6 @@
 
 <script>
 export default {
-  props: ['cafeData'],
-};
+  props: ['cafeData']
+}
 </script>

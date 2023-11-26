@@ -19,7 +19,7 @@ nav {
 }
 
 nav > * {
-  color: #7D71AA;
+  color: #7d71aa;
   display: inline-block;
   list-style: outside none none;
   margin: 0 1em;
@@ -39,7 +39,7 @@ nav > *::after {
   height: 14px;
   width: 14px;
   position: absolute;
-  transition: all .35s ease;
+  transition: all 0.35s ease;
   opacity: 0;
 }
 
@@ -58,12 +58,12 @@ nav > *:after {
   bottom: 0;
   border-bottom: 3px solid var(--main3);
   border-left: 3px solid var(--main3);
-  transform: translate(100%, -50%)
+  transform: translate(100%, -50%);
 }
 
 nav > *:hover:before,
-nav > *:hover:after{
-  transform: translate(0,0);
+nav > *:hover:after {
+  transform: translate(0, 0);
   opacity: 1;
 }
 

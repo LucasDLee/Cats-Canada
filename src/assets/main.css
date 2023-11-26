@@ -1,8 +1,8 @@
 :root {
-  --hyperlink-bg-color: #F5F57A;
-  --main: #F5F57A;
+  --hyperlink-bg-color: #f5f57a;
+  --main: #f5f57a;
   --main2: rgb(191, 183, 111, 0.75);
-  --main3: #3DA35D;
+  --main3: #3da35d;
   --main4: rgb(125, 113, 170, 0.67);
   --main5: rgb(128, 125, 106, 0.5);
 }
