@@ -33,6 +33,15 @@
         <span class="info--text">{{ this.mouseLatLon.lon }}</span>
       </div>
     </l-map>
+    <div class="locations">
+      <section 
+        v-for="(cafeObject, cafeId) in cafesListDetails"
+        :key="cafeId">
+        <h1>{{ cafeObject.properties.name }}</h1>
+        <p>{{ cafeObject.properties.address }}</p>
+        <p>{{ cafeObject.properties.province }}</p>
+      </section>
+    </div>
   </section>
 </template>
 
@@ -45,6 +54,7 @@ export default {
   async created () {
     const cafes = await fetch('./static/json/cafes.geojson')
     this.cafesList = await cafes.json()
+    this.cafesListDetails = this.cafesList.features
   },
   components: {
     BindPopupMessage,
@@ -64,6 +74,7 @@ export default {
         [35, -180]
       ],
       cafesList: null,
+      cafesListDetails: null,
       mapCenter: [54.5, -94],
       mouseLatLon: {
         lat: 0,
@@ -114,6 +125,19 @@ export default {
 </script>
 
 <style scoped>
+.contents {
+  width: 100vw;
+  /* height: 94.5vh; */
+  display: flex;
+  /* grid-template-columns: auto auto; */
+  flex-direction: row;
+  height: 75vh;
+  padding: 1em;
+}
+
+.locations {
+  background-color: green;
+}
 .mouseOverCoord {
   background-color: black;
   border-radius: 15px;
