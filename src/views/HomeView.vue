@@ -1,5 +1,5 @@
 <template>
-  <section class="contents">
+  <v-container class="contents px-0 py-0">
     <l-map
       id="cat-map"
       ref="map"
@@ -19,26 +19,29 @@
         layer-type="base"
       />
 
-      <l-geo-json refs="cafes" :geojson="cafesList" @click="onFeatureClick">
+      <l-geo-json refs="cafes" :geojson="cafeList" @click="onFeatureClick">
         <l-popup><BindPopupMessage :cafeData="selectedCafeProperties"></BindPopupMessage></l-popup>
       </l-geo-json>
 
       <l-control-scale position="bottomleft"></l-control-scale>
 
-      <div class="mouseOverCoord">
-        <span class="info--text">{{ this.mouseLatLon.lat }}</span
-        >,
+      <!-- <div class="mouseOverCoord">
+        <span class="info--text">{{ this.mouseLatLon.lat }}</span>,
         <span class="info--text">{{ this.mouseLatLon.lon }}</span>
-      </div>
+      </div> -->
     </l-map>
-    <div class="locations">
-      <section v-for="(cafeObject, cafeId) in cafesListDetails" :key="cafeId">
-        <h1>{{ cafeObject.properties.name }}</h1>
-        <p>{{ cafeObject.properties.address }}</p>
-        <p>{{ cafeObject.properties.province }}</p>
-      </section>
-    </div>
-  </section>
+    <v-virtual-scroll :items="cafeListDetails">
+      <template v-slot:default="{ item }">
+        <section class="location">
+          <v-icon icon="mdi-coffee" size="x-large"></v-icon>
+          <div>
+            <h1>{{ item.properties.name }}</h1>
+            <p>{{ item.properties.address }}</p>
+          </div>
+        </section>
+      </template>
+    </v-virtual-scroll>
+  </v-container>
 </template>
 
 <script>
@@ -55,9 +58,18 @@ import {
 
 export default {
   async created() {
-    const cafes = await fetch('./static/json/cafes.geojson')
-    this.cafesList = await cafes.json()
-    this.cafesListDetails = this.cafesList.features
+    let cafes = await fetch('./static/json/cafes.geojson')
+    this.cafeList = await cafes.json()
+    let details = (this.cafeList.features).sort(function (a, b) {
+      if (a.properties.name < b.properties.name) {
+        return -1
+      }
+      if (a.properties.name > b.properties.name) {
+        return 1
+      }
+      return 0
+    })
+    this.cafeListDetails = details
   },
   components: {
     BindPopupMessage,
@@ -76,8 +88,8 @@ export default {
         [35, 0],
         [35, -180]
       ],
-      cafesList: null,
-      cafesListDetails: null,
+      cafeList: [],
+      cafeListDetails: [],
       mapCenter: [54.5, -94],
       mouseLatLon: {
         lat: 0,
@@ -138,13 +150,18 @@ export default {
   display: flex;
   /* grid-template-columns: auto auto; */
   flex-direction: row;
-  height: 75vh;
+  height: 100vh;
   padding: 1em;
 }
 
-.locations {
-  background-color: green;
+.location {
+  display: grid;
+  grid-template-columns: auto auto;
+  grid-template-rows: auto auto;
+  justify-content: left;
+  padding: 0.5rem 0;
 }
+
 .mouseOverCoord {
   background-color: black;
   border-radius: 15px;
