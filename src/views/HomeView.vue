@@ -19,7 +19,7 @@
         layer-type="base"
       />
 
-      <l-geo-json refs="cafes" :geojson="cafeList" @click="onFeatureClick">
+      <l-geo-json refs="cafes" :geojson="cafeList" :options="cafeOptions" @click="onFeatureClick">
         <l-popup><BindPopupMessage :cafeData="selectedCafeProperties"></BindPopupMessage></l-popup>
       </l-geo-json>
 
@@ -33,7 +33,7 @@
     <v-virtual-scroll :items="cafeListDetails" id="scroller">
       <template v-slot:default="{ item }">
         <section class="location">
-          <v-icon icon="mdi-coffee" size="x-large"></v-icon>
+          <v-icon icon="mdi-coffee-outline" size="x-large"></v-icon>
           <div>
             <h1>{{ item.properties.name }}</h1>
             <p>{{ item.properties.address }}</p>
@@ -47,6 +47,7 @@
 <script>
 import BindPopupMessage from '@/components/widgets/BindPopupMessage.vue'
 import 'leaflet/dist/leaflet.css'
+import L from 'leaflet'
 import {
   LMap,
   LPopup,
@@ -90,6 +91,9 @@ export default {
       ],
       cafeList: [],
       cafeListDetails: [],
+      cafeOptions: {
+        pointToLayer: this.cafeChangeIcon
+      },
       mapCenter: [54.5, -94],
       mouseLatLon: {
         lat: 0,
@@ -130,6 +134,15 @@ export default {
     }
   },
   methods: {
+    cafeChangeIcon: function (geoJsonPoint, latlng) {
+      // Customize the point marker here
+      return L.marker(latlng, {
+        icon: L.icon({
+          iconUrl: '/src/assets/cafe.png',
+          iconSize: [30, 30],
+        }),
+      });
+    },
     getCoords: function (event) {
       this.mouseLatLon.lat = event.latlng.lat.toFixed(4)
       this.mouseLatLon.lon = event.latlng.lng.toFixed(4)

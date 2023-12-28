@@ -1,6 +1,6 @@
 # Cats Canada
 
-Uses Vue 3 and Leaflet to display a list of cat cafes in Canada.
+Uses Vue 3, Vuetify and Leaflet to display a list of cat cafes in Canada.
 
 ## Attributions
 
