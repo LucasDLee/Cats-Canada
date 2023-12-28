@@ -13,12 +13,7 @@ import NavBar from './components/NavBar.vue'
 
 <style>
 :root {
-  --hyperlink-bg-color: #f5f57a;
-  --main: #f5f57a;
-  --main2: rgb(191, 183, 111, 0.75);
-  --main3: #3da35d;
-  --main4: rgb(125, 113, 170, 0.67);
-  --main5: rgb(128, 125, 106, 0.5);
+  --nav-hover: #1B5E20;
 }
 
 html {

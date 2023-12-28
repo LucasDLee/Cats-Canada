@@ -1,5 +1,5 @@
 <template>
-  <v-container class="contents px-0 py-0">
+  <v-container class="contents px-0 py-0 mx-0" fluid>
     <l-map
       id="cat-map"
       ref="map"
@@ -30,7 +30,7 @@
         <span class="info--text">{{ this.mouseLatLon.lon }}</span>
       </div> -->
     </l-map>
-    <v-virtual-scroll :items="cafeListDetails">
+    <v-virtual-scroll :items="cafeListDetails" id="scroller">
       <template v-slot:default="{ item }">
         <section class="location">
           <v-icon icon="mdi-coffee" size="x-large"></v-icon>
@@ -145,16 +145,16 @@ export default {
 
 <style scoped>
 .contents {
-  width: 100vw;
-  /* height: 94.5vh; */
   display: flex;
   /* grid-template-columns: auto auto; */
   flex-direction: row;
-  height: 100vh;
+  height: 95vh;
   padding: 1em;
+  width: 100vw;
 }
 
 .location {
+  border-left: 1px dotted black;
   display: grid;
   grid-template-columns: auto auto;
   grid-template-rows: auto auto;

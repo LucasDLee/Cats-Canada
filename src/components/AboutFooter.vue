@@ -1,5 +1,5 @@
 <template>
-  <footer id="about-footer">
+  <footer id="about-footer" class="bg-green-lighten-3">
     <a :href="githubProfile" target="_blank"><i class="fab fa-github icon"></i></a>
     <a :href="linkedInProfile" target="_blank"><i class="fab fa-linkedin-in icon"></i></a>
     <a :href="email" target="_blank"><i class="fab fa-google-plus-g icon"></i></a>
@@ -23,11 +23,11 @@ export default {
 
 <style scoped>
 #about-footer {
-  background-color: var(--hyperlink-bg-color);
   display: flex;
   flex-direction: row;
   justify-content: center;
   left: 0;
+  bottom: 0;
   gap: 0 2em;
   padding: 0.75rem 0;
   position: absolute;

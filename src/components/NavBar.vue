@@ -1,5 +1,5 @@
 <template>
-  <nav>
+  <nav class="bg-green-lighten-3">
     <RouterLink to="/">Cat Map</RouterLink>
     <RouterLink to="/about">About</RouterLink>
   </nav>
@@ -11,11 +11,11 @@ import { RouterLink } from 'vue-router'
 
 <style scoped>
 nav {
-  background-color: var(--hyperlink-bg-color);
   border-bottom: 1px dotted black;
   text-transform: uppercase;
   text-align: center;
   font-weight: 600;
+  height: 5vh;
 }
 
 nav > * {
@@ -27,7 +27,7 @@ nav > * {
 }
 
 nav > * {
-  padding: 0.7em 0.7em;
+  padding: 0.5em 0.5em;
   position: relative;
   text-decoration: none;
   font-size: 20px;
@@ -47,8 +47,8 @@ nav > *::before {
   content: '';
   right: 0;
   top: 0;
-  border-top: 3px solid var(--main3);
-  border-right: 3px solid var(--main3);
+  border-top: 3px solid var(--nav-hover);
+  border-right: 3px solid var(--nav-hover);
   transform: translate(-100%, 50%);
 }
 
@@ -56,8 +56,8 @@ nav > *:after {
   content: '';
   left: 0;
   bottom: 0;
-  border-bottom: 3px solid var(--main3);
-  border-left: 3px solid var(--main3);
+  border-bottom: 3px solid var(--nav-hover);
+  border-left: 3px solid var(--nav-hover);
   transform: translate(100%, -50%);
 }
 
@@ -68,6 +68,6 @@ nav > *:hover:after {
 }
 
 nav > *:hover {
-  color: var(--main3);
+  color: var(--nav-hover);
 }
 </style>
