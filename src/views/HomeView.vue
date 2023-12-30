@@ -1,5 +1,5 @@
 <template>
-  <section class="contents">
+  <v-container class="contents px-0 py-0 mx-0" fluid>
     <l-map
       id="cat-map"
       ref="map"
@@ -19,32 +19,58 @@
         layer-type="base"
       />
 
-      <l-geo-json 
-        refs="cafes"
-        :geojson="cafesList"
-        @click="onFeatureClick">
-        <l-popup><BindPopupMessage :cafeData=selectedCafeProperties></BindPopupMessage></l-popup>
+      <l-geo-json refs="cafes" :geojson="cafeList" :options="cafeOptions" @click="onFeatureClick">
+        <l-popup><BindPopupMessage :cafeData="selectedCafeProperties"></BindPopupMessage></l-popup>
       </l-geo-json>
 
       <l-control-scale position="bottomleft"></l-control-scale>
 
-      <div class="mouseOverCoord">
-        <span class="info--text">{{ this.mouseLatLon.lat }}</span>, 
+      <!-- <div class="mouseOverCoord">
+        <span class="info--text">{{ this.mouseLatLon.lat }}</span>,
         <span class="info--text">{{ this.mouseLatLon.lon }}</span>
-      </div>
+      </div> -->
     </l-map>
-  </section>
+    <v-virtual-scroll :items="cafeListDetails" id="scroller">
+      <template v-slot:default="{ item }">
+        <section class="location">
+          <div class="d-flex align-center">
+            <v-icon icon="mdi-coffee-outline" size="x-large"></v-icon>
+            <h1 class="pl-1">{{ item.properties.name }}</h1>
+          </div>
+          <p class="pl-9">{{ item.properties.address }}</p>
+        </section>
+      </template>
+    </v-virtual-scroll>
+  </v-container>
 </template>
 
 <script>
 import BindPopupMessage from '@/components/widgets/BindPopupMessage.vue'
 import 'leaflet/dist/leaflet.css'
-import { LMap, LPopup, LGeoJson, LTileLayer, LControlScale, LControlLayers } from '@vue-leaflet/vue-leaflet'
+import L from 'leaflet'
+import {
+  LMap,
+  LPopup,
+  LGeoJson,
+  LTileLayer,
+  LControlScale,
+  LControlLayers
+} from '@vue-leaflet/vue-leaflet'
 
 export default {
-  async created () {
-    const cafes = await fetch('./static/json/cafes.geojson')
-    this.cafesList = await cafes.json()
+  async created() {
+    let cafes = await fetch('./static/json/cafes.geojson')
+    this.cafeList = await cafes.json()
+    let details = (this.cafeList.features).sort(function (a, b) {
+      if (a.properties.name < b.properties.name) {
+        return -1
+      }
+      if (a.properties.name > b.properties.name) {
+        return 1
+      }
+      return 0
+    })
+    this.cafeListDetails = details
   },
   components: {
     BindPopupMessage,
@@ -63,7 +89,11 @@ export default {
         [35, 0],
         [35, -180]
       ],
-      cafesList: null,
+      cafeList: [],
+      cafeListDetails: [],
+      cafeOptions: {
+        pointToLayer: this.cafeChangeIcon
+      },
       mapCenter: [54.5, -94],
       mouseLatLon: {
         lat: 0,
@@ -74,25 +104,29 @@ export default {
           name: 'ESRI World Street Map',
           visible: true,
           url: 'https://services.arcgisonline.com/ArcGIS/rest/services/World_Street_Map/MapServer/tile/{z}/{y}/{x}',
-          attribution: 'Tiles &copy; Esri &mdash; Source: Esri, DeLorme, NAVTEQ, USGS, Intermap, iPC, NRCAN, Esri Japan, METI, Esri China (Hong Kong), Esri (Thailand), TomTom, 2012'
+          attribution:
+            'Tiles &copy; Esri &mdash; Source: Esri, DeLorme, NAVTEQ, USGS, Intermap, iPC, NRCAN, Esri Japan, METI, Esri China (Hong Kong), Esri (Thailand), TomTom, 2012'
         },
         {
           name: 'OpenStreetMap',
           visible: false,
           url: 'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',
-          attribution:'&copy; <a target="_blank" href="http://osm.org/copyright">OpenStreetMap</a> contributors',
+          attribution:
+            '&copy; <a target="_blank" href="http://osm.org/copyright">OpenStreetMap</a> contributors'
         },
         {
           name: 'Stadia Maps',
           visible: false,
           url: 'https://tiles.stadiamaps.com/tiles/osm_bright/{z}/{x}/{y}{r}.png',
-          attribution: '&copy; <a href="https://www.stadiamaps.com/" target="_blank">Stadia Maps</a> &copy; <a href="https://openmaptiles.org/" target="_blank">OpenMapTiles</a> &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+          attribution:
+            '&copy; <a href="https://www.stadiamaps.com/" target="_blank">Stadia Maps</a> &copy; <a href="https://openmaptiles.org/" target="_blank">OpenMapTiles</a> &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
         },
         {
           name: 'Wikimedia Maps',
           visible: false,
           url: 'https://maps.wikimedia.org/osm-intl/{z}/{x}/{y}.png',
-          attribution: '&copy; <a href="https://www.mediawiki.org/wiki/Wikimedia_Maps/API">Wikimedia Maps API</a>'
+          attribution:
+            '&copy; <a href="https://www.mediawiki.org/wiki/Wikimedia_Maps/API">Wikimedia Maps API</a>'
         }
       ],
       selectedCafeProperties: '',
@@ -100,6 +134,14 @@ export default {
     }
   },
   methods: {
+    cafeChangeIcon: function (geoJsonPoint, latlng) {
+      return L.marker(latlng, {
+        icon: L.icon({
+          iconUrl: '/src/assets/cafe.png',
+          iconSize: [30, 30],
+        }),
+      })
+    },
     getCoords: function (event) {
       this.mouseLatLon.lat = event.latlng.lat.toFixed(4)
       this.mouseLatLon.lon = event.latlng.lng.toFixed(4)
@@ -114,6 +156,26 @@ export default {
 </script>
 
 <style scoped>
+#cat-map {
+  min-width: 60vw;
+}
+.contents {
+  display: flex;
+  /* grid-template-columns: auto auto; */
+  flex-direction: row;
+  height: 95vh;
+  padding: 1em;
+}
+
+.location {
+  border-left: 1px dotted black;
+  /* display: grid;
+  grid-template-columns: auto auto;
+  grid-template-rows: auto auto; */
+  justify-content: left;
+  padding: 0.75rem 0;
+}
+
 .mouseOverCoord {
   background-color: black;
   border-radius: 15px;

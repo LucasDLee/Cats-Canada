@@ -1,5 +1,5 @@
 <template>
-  <nav>
+  <nav class="bg-green-lighten-3">
     <RouterLink to="/">Cat Map</RouterLink>
     <RouterLink to="/about">About</RouterLink>
   </nav>
@@ -11,15 +11,18 @@ import { RouterLink } from 'vue-router'
 
 <style scoped>
 nav {
-  background-color: var(--hyperlink-bg-color);
   border-bottom: 1px dotted black;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   text-transform: uppercase;
-  text-align: center;
+  /* text-align: center; */
   font-weight: 600;
+  height: 5vh;
 }
 
 nav > * {
-  color: #7D71AA;
+  color: #7d71aa;
   display: inline-block;
   list-style: outside none none;
   margin: 0 1em;
@@ -27,7 +30,7 @@ nav > * {
 }
 
 nav > * {
-  padding: 0.7em 0.7em;
+  padding: 0.5em 0.5em;
   position: relative;
   text-decoration: none;
   font-size: 20px;
@@ -39,7 +42,7 @@ nav > *::after {
   height: 14px;
   width: 14px;
   position: absolute;
-  transition: all .35s ease;
+  transition: all 0.35s ease;
   opacity: 0;
 }
 
@@ -47,8 +50,8 @@ nav > *::before {
   content: '';
   right: 0;
   top: 0;
-  border-top: 3px solid var(--main3);
-  border-right: 3px solid var(--main3);
+  border-top: 3px solid var(--nav-hover);
+  border-right: 3px solid var(--nav-hover);
   transform: translate(-100%, 50%);
 }
 
@@ -56,18 +59,18 @@ nav > *:after {
   content: '';
   left: 0;
   bottom: 0;
-  border-bottom: 3px solid var(--main3);
-  border-left: 3px solid var(--main3);
-  transform: translate(100%, -50%)
+  border-bottom: 3px solid var(--nav-hover);
+  border-left: 3px solid var(--nav-hover);
+  transform: translate(100%, -50%);
 }
 
 nav > *:hover:before,
-nav > *:hover:after{
-  transform: translate(0,0);
+nav > *:hover:after {
+  transform: translate(0, 0);
   opacity: 1;
 }
 
 nav > *:hover {
-  color: var(--main3);
+  color: var(--nav-hover);
 }
 </style>
