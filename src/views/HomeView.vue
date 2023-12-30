@@ -33,11 +33,11 @@
     <v-virtual-scroll :items="cafeListDetails" id="scroller">
       <template v-slot:default="{ item }">
         <section class="location">
-          <v-icon icon="mdi-coffee-outline" size="x-large"></v-icon>
-          <div>
-            <h1>{{ item.properties.name }}</h1>
-            <p>{{ item.properties.address }}</p>
+          <div class="d-flex align-center">
+            <v-icon icon="mdi-coffee-outline" size="x-large"></v-icon>
+            <h1 class="pl-1">{{ item.properties.name }}</h1>
           </div>
+          <p class="pl-9">{{ item.properties.address }}</p>
         </section>
       </template>
     </v-virtual-scroll>
@@ -135,13 +135,12 @@ export default {
   },
   methods: {
     cafeChangeIcon: function (geoJsonPoint, latlng) {
-      // Customize the point marker here
       return L.marker(latlng, {
         icon: L.icon({
           iconUrl: '/src/assets/cafe.png',
           iconSize: [30, 30],
         }),
-      });
+      })
     },
     getCoords: function (event) {
       this.mouseLatLon.lat = event.latlng.lat.toFixed(4)
@@ -157,22 +156,24 @@ export default {
 </script>
 
 <style scoped>
+#cat-map {
+  min-width: 60vw;
+}
 .contents {
   display: flex;
   /* grid-template-columns: auto auto; */
   flex-direction: row;
   height: 95vh;
   padding: 1em;
-  width: 100vw;
 }
 
 .location {
   border-left: 1px dotted black;
-  display: grid;
+  /* display: grid;
   grid-template-columns: auto auto;
-  grid-template-rows: auto auto;
+  grid-template-rows: auto auto; */
   justify-content: left;
-  padding: 0.5rem 0;
+  padding: 0.75rem 0;
 }
 
 .mouseOverCoord {

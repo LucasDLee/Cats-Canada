@@ -12,8 +12,11 @@ import { RouterLink } from 'vue-router'
 <style scoped>
 nav {
   border-bottom: 1px dotted black;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   text-transform: uppercase;
-  text-align: center;
+  /* text-align: center; */
   font-weight: 600;
   height: 5vh;
 }
