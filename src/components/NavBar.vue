@@ -30,7 +30,7 @@ nav > * {
 }
 
 nav > * {
-  padding: 0.5em 0.5em;
+  padding: 0.35em 0.35em;
   position: relative;
   text-decoration: none;
   font-size: 20px;

@@ -19,8 +19,8 @@
         layer-type="base"
       />
 
-      <l-geo-json refs="cafes" :geojson="cafeList" :options="cafeOptions" @click="onFeatureClick">
-        <l-popup><BindPopupMessage :cafeData="selectedCafeProperties"></BindPopupMessage></l-popup>
+      <l-geo-json ref="cafes" :geojson="cafeList" :options="cafeOptions" @click="onFeatureClick">
+        <l-popup ref="popup"><BindPopupMessage :cafeData="selectedCafeProperties"></BindPopupMessage></l-popup>
       </l-geo-json>
 
       <l-control-scale position="bottomleft"></l-control-scale>
@@ -31,8 +31,8 @@
       </div> -->
     </l-map>
     <v-virtual-scroll :items="cafeListDetails" id="scroller">
-      <template v-slot:default="{ item }">
-        <section class="location">
+      <template v-slot:default="{ item, index }">
+        <section class="location" :class="[getItemClass(index), 'cafe']" @click="findSelectedCafe(item)">
           <div class="d-flex align-center">
             <v-icon icon="mdi-coffee-outline" size="x-large"></v-icon>
             <h1 class="pl-1">{{ item.properties.name }}</h1>
@@ -146,6 +146,14 @@ export default {
       this.mouseLatLon.lat = event.latlng.lat.toFixed(4)
       this.mouseLatLon.lon = event.latlng.lng.toFixed(4)
     },
+    getItemClass: function (index) {
+      return index % 2 === 0 ? 'even-item' : 'odd-item'
+    },
+    findSelectedCafe: function (item) {
+      let coords = item.geometry.coordinates
+      this.mapCenter = [coords[1], coords[0]]
+      this.selectedCafeProperties = item.properties
+    },
     onFeatureClick: function (e) {
       const properties = e.layer.feature.properties
       this.mapCenter = [this.mouseLatLon.lat, this.mouseLatLon.lon]
@@ -158,6 +166,19 @@ export default {
 <style scoped>
 #cat-map {
   min-width: 60vw;
+}
+
+.cafe {
+  border-bottom: 3px dashed black;
+  cursor: pointer;
+}
+
+.even-item {
+  background-color: white;
+}
+
+.odd-item {
+  background-color: azure;
 }
 .contents {
   display: flex;
