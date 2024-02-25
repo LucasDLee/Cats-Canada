@@ -20,7 +20,7 @@
       />
 
       <l-geo-json ref="cafes" :geojson="cafeList" :options="cafeOptions" @click="onFeatureClick">
-        <l-popup ref="popup"><BindPopupMessage :cafeData="selectedCafeProperties"></BindPopupMessage></l-popup>
+        <l-popup ref="popup"><BindPopupMessage :cafeData="selectedCafeProperties" ref="msg"></BindPopupMessage></l-popup>
       </l-geo-json>
 
       <l-control-scale position="bottomleft"></l-control-scale>
@@ -134,7 +134,7 @@ export default {
     }
   },
   methods: {
-    cafeChangeIcon: function (geoJsonPoint, latlng) {
+    cafeChangeIcon: function (_, latlng) {
       return L.marker(latlng, {
         icon: L.icon({
           iconUrl: '/src/assets/cafe.png',
@@ -150,9 +150,16 @@ export default {
       return index % 2 === 0 ? 'even-item' : 'odd-item'
     },
     findSelectedCafe: function (item) {
+      const map = this.$refs.cafes.leafletObject
+      const geojsonLayer = map.getLayers().find(layer => layer.feature.properties.name === item.properties.name) //.find(layer => layer instanceof L.GeoJSON)
       let coords = item.geometry.coordinates
       this.mapCenter = [coords[1], coords[0]]
       this.selectedCafeProperties = item.properties
+      if (geojsonLayer) {
+        // Get the first layer in the GeoJSON layer
+        const content = this.$refs.popup.$el
+        geojsonLayer.bindPopup(content).openPopup()
+      }
     },
     onFeatureClick: function (e) {
       const properties = e.layer.feature.properties
